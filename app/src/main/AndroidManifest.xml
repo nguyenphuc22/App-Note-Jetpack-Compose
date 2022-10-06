@@ -14,7 +14,7 @@
         android:theme="@style/Theme.AppNoteJetpackCompose"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".SplashActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.AppNoteJetpackCompose">
@@ -28,6 +28,8 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
+        <activity android:name=".MainActivity"/>
     </application>
 
 </manifest>
