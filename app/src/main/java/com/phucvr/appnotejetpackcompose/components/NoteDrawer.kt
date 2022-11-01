@@ -56,7 +56,7 @@ private fun ScreenNavigationButton(
     var textColor = colors.onSurface.copy(alpha = 0.6f)
     var backgroundColor = colors.surface
 
-    if (!isSelected) {
+    if (isSelected) {
         imageAlpha = 1f
         textColor = colors.primary
         backgroundColor = colors.primary.copy(alpha = 0.12f)
