@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.phucvr.appnotejetpackcompose.components.Note
 import com.phucvr.appnotejetpackcompose.components.NoteDrawer
 import com.phucvr.appnotejetpackcompose.routing.Screen
 import com.phucvr.appnotejetpackcompose.ui.theme.AppNoteJetpackComposeTheme
@@ -56,7 +57,7 @@ fun MainView() {
             }
         },
         content = {
-            Text(text = "Nick Seven")
+            Note()
         }
     )
 }
