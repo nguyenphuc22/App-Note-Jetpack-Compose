@@ -3,6 +3,7 @@ package com.phucvr.appnotejetpackcompose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -15,11 +16,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.phucvr.appnotejetpackcompose.components.Note
 import com.phucvr.appnotejetpackcompose.components.NoteDrawer
+import com.phucvr.appnotejetpackcompose.model.NoteModel
 import com.phucvr.appnotejetpackcompose.routing.Screen
+import com.phucvr.appnotejetpackcompose.screen.NotesScreen
 import com.phucvr.appnotejetpackcompose.ui.theme.AppNoteJetpackComposeTheme
+import com.phucvr.appnotejetpackcompose.viewmodel.MainViewModel
+import com.phucvr.appnotejetpackcompose.viewmodel.MainViewModelFactory
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
+
+    private val viewModel: MainViewModel by viewModels(factoryProducer = {
+        MainViewModelFactory(
+            this,
+            (application as NotesApplication).dependencyInjector.repository
+        )
+    })
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -29,7 +42,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    MainView()
+                    MainView(viewModel)
                 }
             }
         }
@@ -37,7 +50,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun MainView() {
+fun MainView(viewModel: MainViewModel) {
     val coroutineScope = rememberCoroutineScope()
     val scaffoldState: ScaffoldState = rememberScaffoldState()
     val listScreen = ArrayList<Screen>()
@@ -57,15 +70,7 @@ fun MainView() {
             }
         },
         content = {
-            Note()
+            NotesScreen(viewModel = viewModel)
         }
     )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    AppNoteJetpackComposeTheme {
-        MainView()
-    }
 }
